@@ -1,5 +1,6 @@
 <template>
   <div class="q-pa-md" style="max-width: 400px">
+
     <q-form
       @submit="onSubmit"
       @reset="onReset"
@@ -8,28 +9,32 @@
       <q-input
         filled
         v-model="name"
-        label="Your name *"
-        hint="Name and surname"
+        label="ชื่อ *"
+        hint="ชื่อ และ นามสกุล"
         lazy-rules
-        :rules="[ val => val && val.length > 0 || 'Please type something']"
+        :rules="[ val => val && val.length > 0 || 'กรุณาใส่ชื่อนามสกุล']"
       />
+
       <q-input
         filled
         type="number"
         v-model="age"
-        label="Your age *"
+        label="อายุ *"
         lazy-rules
         :rules="[
-          val => val !== null && val !== '' || 'Please type your age',
-          val => val > 0 && val < 100 || 'Please type a real age'
+          val => val !== null && val !== '' || 'กรุณาใส่อายุ',
+          val => val > 0 && val < 100 || 'กรุณาใส่อายุจริง'
         ]"
       />
-      <q-toggle v-model="accept" label="I accept the license and terms" />
+
+      <q-toggle v-model="accept" label="ยอมรับและอนุญาตเงื่อนไข" />
+
       <div>
-        <q-btn label="Submit" type="submit" color="primary"/>
-        <q-btn label="Reset" type="reset" color="primary" flat class="q-ml-sm" />
+        <q-btn label="ตกลง" type="submit" color="primary"/>
+        <q-btn label="ล้างข้อมูล" type="reset" color="primary" flat class="q-ml-sm" />
       </div>
     </q-form>
+
   </div>
 </template>
 
@@ -44,10 +49,12 @@ export default {
     const name = ref(null)
     const age = ref(null)
     const accept = ref(false)
+
     return {
       name,
       age,
       accept,
+
       onSubmit () {
         if (accept.value !== true) {
           $q.notify({
@@ -66,6 +73,7 @@ export default {
           })
         }
       },
+
       onReset () {
         name.value = null
         age.value = null
